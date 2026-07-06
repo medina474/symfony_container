@@ -28,3 +28,6 @@ services:
     tty: true
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+  redis:
+    ports:
+      - "6379:6379"

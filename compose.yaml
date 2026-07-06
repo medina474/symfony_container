@@ -40,8 +40,16 @@ services:
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
 
+  redis:
+    image: redis:8.8
+    ulimits:
+      memlock: -1
+    volumes:
+      - redis:/data
+
 volumes:
   caddy_data:
   caddy_config:
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+  redis:
