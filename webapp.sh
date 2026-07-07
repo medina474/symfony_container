@@ -34,3 +34,6 @@ composer require \
 
 composer require \
 	symfony/security-bundle
+
+composer require \
+	symfony/uid
