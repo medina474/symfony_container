@@ -49,8 +49,8 @@ jobs:
       - name: Check Mercure reachability
         run: curl -vI --insecure --fail-with-body https://localhost/.well-known/mercure?topic=test
       # Uncomment if Doctrine ORM is installed
-      # - name: Create test database
-      #   run: docker compose exec -T php bin/console -e test doctrine:database:create
+      - name: Create test database
+        run: docker compose exec -T php bin/console -e test doctrine:database:create
       # Uncomment if Doctrine Migrations is installed
       # - name: Run migrations
       #   run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
