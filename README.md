@@ -231,3 +231,5 @@ L’observabilité désigne l’ensemble des mécanismes permettant de comprendr
 ```shell
 bin/console make:controller DemoController
 ```
+
+bin/console secrets:generate-keys
