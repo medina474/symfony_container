@@ -99,6 +99,7 @@ RUN <<-EOF
 	mkdir -p var/cache var/log var/share
 	composer dump-autoload --classmap-authoritative --no-dev
 	composer dump-env prod
+	#php bin/console debug:container --env-vars
 	composer run-script --no-dev post-install-cmd
 	if [ -f importmap.php ]; then
 		php bin/console asset-map:compile
