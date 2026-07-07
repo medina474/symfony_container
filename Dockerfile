@@ -77,6 +77,17 @@ RUN <<-EOF
 	pip3 install --no-cache-dir --break-system-packages sqlfluff[rs]
 EOF
 
+# OpenCode
+RUN <<-'EOF'
+	mkdir -p /data/opencode
+	chown -R nonroot:nonroot /data/opencode
+	chmod -R u+rwX /data/opencode
+
+	mkdir -p /config/opencode
+	chown -R nonroot:nonroot /config/opencode
+	chmod -R u+rwX /config/opencode
+EOF
+
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
