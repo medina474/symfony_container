@@ -10,9 +10,26 @@ services:
       APP_SECRET: ${APP_SECRET}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
 
   database:
     volumes:
       - database_data:/var/lib/postgresql:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/postgresql:rw
+
+  redis:
+    volumes:
+      - redis_data:/data
+
+  volumes:
+    caddy_data:
+    caddy_config:
+  ###> symfony/mercure-bundle ###
+  ###< symfony/mercure-bundle ###
+  ###> doctrine/doctrine-bundle ###
+    database_data:
+  ###< doctrine/doctrine-bundle ###
+    redis_data:

@@ -16,8 +16,8 @@ services:
       MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}/.well-known/mercure}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
     volumes:
-      - caddy_data:/data
-      - caddy_config:/config
+      - /data
+      - /config
     ports:
       - name: http
         target: 80
@@ -41,7 +41,7 @@ services:
     ulimits:
       memlock: -1
     volumes:
-      - redis:/data
+      - /data
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -61,17 +61,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 60s
-###< doctrine/doctrine-bundle ###
-
-volumes:
-  caddy_data:
-  caddy_config:
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###
-  redis:
-
-###> doctrine/doctrine-bundle ###
-  database_data:
+    volumes:
+      - /var/lib/postgresql:rw
 ###< doctrine/doctrine-bundle ###
 
 secrets:
