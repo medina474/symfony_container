@@ -3,6 +3,7 @@
 services:
   php:
     image: ${IMAGES_PREFIX:-}app-php-dev
+    restart: no
     build:
       context: .
       target: frankenphp_dev
@@ -34,6 +35,7 @@ services:
 
 ###> doctrine/doctrine-bundle ###
   database:
+    restart: no
     ports:
       - "5432"
 ###< doctrine/doctrine-bundle ###
@@ -41,9 +43,10 @@ services:
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit
+    restart: no
     ports:
       - "1025"
-      - "8025"
+      - "8025:8025"
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
