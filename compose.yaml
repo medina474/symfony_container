@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     depends_on:
       - database
+      - redis
     secrets:
       - database_password
     environment:
