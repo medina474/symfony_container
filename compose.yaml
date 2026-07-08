@@ -45,7 +45,7 @@ services:
 
 ###> doctrine/doctrine-bundle ###
   database:
-    image: ${COMPOSE_PROJECT_NAME}/postgresql
+    image: ${IMAGES_PREFIX:-}app-postgresql
     build:
       context: postgresql
     restart: no
