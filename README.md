@@ -232,20 +232,14 @@ L’observabilité désigne l’ensemble des mécanismes permettant de comprendr
 bin/console make:controller DemoController
 ```
 
-## Secrets
+## Construire l'image
 
 ```shell
-bin/console secrets:generate-keys
+docker compose build --pull --no-cache
 ```
 
-```shell
-openssl rand -base64 32 > secrets/database_password
-```
+### Passer en production
 
 ```shell
-bin/console secrets:set DATABASE_PASSWORD secrets/database_password
-```
-
-```shell
-bin/console secrets:list --reveal
+docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 ```
