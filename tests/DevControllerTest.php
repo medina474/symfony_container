@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
-final class HomeControllerTest extends WebTestCase
+final class DevControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
 
