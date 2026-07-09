@@ -27,7 +27,7 @@ final readonly class FirstNameStat
         $this->id = (new UuidV4())->toString();
     }
 
-    public function getId(): ?int
+    public function getId(): string
     {
         return $this->id;
     }

@@ -6,6 +6,16 @@
 -- la recherche rapide de chaînes similaires.
 create extension if not exists pg_trgm;
 
+create extension if not exists unaccent;
+
+create or replace function norm(text)
+returns text
+language sql
+stable
+as $$
+  select unaccent(lower($1))
+$$;
+
 -- Symfony
 -- ----------------------------------------------------------------------------
 
