@@ -66,7 +66,7 @@ jobs:
       #   run: docker compose exec -T php bin/console -e test doctrine:schema:validate
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: shivammathur/setup-php
     permissions:
       contents: read
       packages: read
