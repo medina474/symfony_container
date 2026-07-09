@@ -3,33 +3,30 @@
 namespace App\Entity;
 
 use App\Repository\CountryRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
 class Country
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 2)]
     private ?string $code = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $long = null;
 
     #[ORM\Column(length: 2, nullable: true)]
     private ?string $flag = null;
 
-    #[ORM\Column]
-    private ?bool $sepa = null;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $sepa = false;
 
-    #[ORM\Column]
-    private ?bool $intracommunity = null;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $intracommunity = false;
 
     public function getId(): ?int
     {
@@ -84,7 +81,7 @@ class Country
         return $this;
     }
 
-    public function isSepa(): ?bool
+    public function isSepa(): bool
     {
         return $this->sepa;
     }
@@ -96,7 +93,7 @@ class Country
         return $this;
     }
 
-    public function isIntracommunity(): ?bool
+    public function isIntracommunity(): bool
     {
         return $this->intracommunity;
     }
@@ -106,5 +103,10 @@ class Country
         $this->intracommunity = $intracommunity;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->country;
     }
 }
