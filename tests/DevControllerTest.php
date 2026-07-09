@@ -18,7 +18,7 @@ final class DevControllerTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/demo');
         self::assertResponseIsSuccessful();
-        //self::assertPageTitleContains('Jardins de Cocagne');
+        self::assertPageTitleContains('Démo');
         //self::assertSame('Ensemble, cultivons la solidarité', $crawler->filter('h1')->first()->text());
     }
 }

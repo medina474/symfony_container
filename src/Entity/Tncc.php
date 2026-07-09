@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Tncc
 {
     #[ORM\Id]
-    #[ORM\Column(type: Types::BIGINT)]
+    #[ORM\Column(type: Types::SMALLINT)]
     protected ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]

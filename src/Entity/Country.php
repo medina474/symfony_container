@@ -22,10 +22,10 @@ class Country
     #[ORM\Column(length: 2, nullable: true)]
     private ?string $flag = null;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $sepa = false;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $intracommunity = false;
 
     public function getCode(): ?string

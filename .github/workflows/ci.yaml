@@ -86,7 +86,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --no-interaction --no-progress --no-scripts
+        run: composer install --no-interaction --no-progress --no-scripts --no-dev
 
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v8

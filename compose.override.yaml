@@ -50,6 +50,13 @@ services:
       - "1025"
       - "8025:8025"
     environment:
+      TZ: Europe/Paris
+      # Accept any SMTP username and password, including none. Use this to basically allow anything.
       MP_SMTP_AUTH_ACCEPT_ANY: 1
+      # Typically either STARTTLS or TLS is enforced for all SMTP authentication.
+      # This option allows insecure PLAIN & LOGIN SMTP authentication when using STARTTLS.
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      # Disable Mailpit’s automatic version checking.
+      # When enabled, Mailpit will not contact GitHub to check for new releases.
+      MP_DISABLE_VERSION_CHECK: 1
 ###< symfony/mailer ###

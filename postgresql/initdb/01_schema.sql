@@ -33,8 +33,8 @@ create table job (
 -- ----------------------------------------------------------------------------
 create table tncc (
     id smallint primary key,
-    article text,
-    charniere text
+    article text not null,
+    charniere text not null
 );
 
 insert into tncc values
