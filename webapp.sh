@@ -37,3 +37,8 @@ composer require \
 
 composer require \
 	symfony/uid
+
+composer require --dev \
+	orm-fixtures \
+	phpstan/phpstan-doctrine
+
