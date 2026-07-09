@@ -28,11 +28,6 @@ class Country
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $intracommunity = false;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getCode(): ?string
     {
         return $this->code;
@@ -41,7 +36,6 @@ class Country
     public function setCode(string $code): static
     {
         $this->code = $code;
-
         return $this;
     }
 
@@ -53,7 +47,6 @@ class Country
     public function setCountry(string $country): static
     {
         $this->country = $country;
-
         return $this;
     }
 
@@ -65,7 +58,6 @@ class Country
     public function setLong(?string $long): static
     {
         $this->long = $long;
-
         return $this;
     }
 
@@ -77,7 +69,6 @@ class Country
     public function setFlag(?string $flag): static
     {
         $this->flag = $flag;
-
         return $this;
     }
 
@@ -89,7 +80,6 @@ class Country
     public function setSepa(bool $sepa): static
     {
         $this->sepa = $sepa;
-
         return $this;
     }
 
@@ -101,7 +91,6 @@ class Country
     public function setIntracommunity(bool $intracommunity): static
     {
         $this->intracommunity = $intracommunity;
-
         return $this;
     }
 
