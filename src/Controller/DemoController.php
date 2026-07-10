@@ -83,6 +83,19 @@ final class DemoController extends AbstractController
     }
 
     /**
+     * Dialog
+     */
+    #[Route('/demo/dialog', name: 'demo_dialog', methods: ['POST'])]
+    public function dialog(): Response
+    {
+        return $this->render('streams/demo.html.twig', [
+                'content' => 'demo',
+        ], new Response('', 200, [
+            'Content-Type' => 'text/vnd.turbo-stream.html'
+        ]));
+    }
+
+    /**
      * Symfony Messenger
      */
     #[Route('/demo/messenger', name: 'demo_messenger', methods:['POST'])]

@@ -21,6 +21,13 @@
   --btn-line-height: 1.0rem;
   --btn-border-width: 1px;
 }
+
+@layer base {
+  dialog {
+    @apply 
+    margin-auto
+    shadow-lg;
+  }
 }
 
 @layer components {
