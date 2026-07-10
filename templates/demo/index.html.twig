@@ -63,4 +63,13 @@
     </form>
   </li>
 </ul>
+
+<dialog id="my-dialog" class="m-auto">
+  <p>This dialog was opened using an invoker command.</p>
+  <button commandfor="my-dialog" command="close">Close</button>
+</dialog>
+
+<button type="button" command="show-modal" commandfor="my-dialog" class="btn btn-primary">Open modal</button>
+
+144 x 144
 {% endblock %}
