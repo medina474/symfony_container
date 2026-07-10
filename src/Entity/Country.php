@@ -7,10 +7,18 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
+#[ORM\Table(
+    indexes: [
+        new ORM\Index(
+            name: 'idx_country_country_code',
+            columns: ['country','code']
+        )
+    ]
+)]
 class Country
 {
     #[ORM\Id]
-    #[ORM\Column(length: 2)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $code = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -19,7 +27,7 @@ class Country
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $long = null;
 
-    #[ORM\Column(length: 2, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $flag = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
@@ -27,6 +35,19 @@ class Country
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $intracommunity = false;
+
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    protected ?int $phone_code = null;
+
+    #[ORM\ManyToOne()]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Tncc $tncc = null;
+
+    #[ORM\Column(type: Types::TEXT,
+        insertable: false,
+        updatable: false,
+        generated: 'ALWAYS')]
+    private ?string $_country = null;
 
     public function getCode(): ?string
     {
@@ -92,6 +113,33 @@ class Country
     {
         $this->intracommunity = $intracommunity;
         return $this;
+    }
+
+    public function getPhoneCode(): ?int
+    {
+        return $this->phone_code;
+    }
+
+    public function setPhoneCode(int $phone_code): static
+    {
+        $this->phone_code = $phone_code;
+        return $this;
+    }
+
+    public function getTncc(): ?Tncc
+    {
+        return $this->tncc;
+    }
+
+    public function setTncc(Tncc $tncc): static
+    {
+        $this->tncc = $tncc;
+        return $this;
+    }
+    
+    public function get_Country(): ?string
+    {
+        return $this->_country;
     }
 
     public function __toString(): string

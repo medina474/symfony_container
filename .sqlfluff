@@ -5,8 +5,8 @@ templater = raw
 # Longueur de ligne max
 max_line_length = 120
 
-# Règles à exclure si besoin (décommenter selon préférences d'équipe)
-# exclude_rules = L034,L044
+# PG01 : CREATE INDEX should use CONCURRENTLY to avoid locking the table during the build.
+exclude_rules = PG01
 
 [sqlfluff:indentation]
 indented_joins = false

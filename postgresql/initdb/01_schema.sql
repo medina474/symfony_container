@@ -31,6 +31,8 @@ create table job (
 );
 
 -- ----------------------------------------------------------------------------
+begin;
+
 create table tncc (
     id smallint primary key,
     article text not null,
@@ -50,25 +52,24 @@ insert into tncc values
 
 -- Pays
 
-create table country
-(
+create table country (
     code text primary key,
     country text not null,
-    tncc_id smallint references tncc,
+    tncc_id smallint references tncc not null,
     flag text,
     "long" text, -- noqa: RF06
     intracommunity boolean not null default false,
     sepa boolean not null default false,
-    phonecode smallint
+    phone_code smallint
 );
 
 -- Index pour la pagination
-create index concurrently idx_country_country_code
+create index idx_country_country_code
 on country (country, code);
 
 -- Colonne pour la recherche textuelle
 alter table country
-add column _country text;
+add column _country text not null;
 
 -- Mise à jour de cette colonne 
 create or replace function country_search_text_trigger()
@@ -87,7 +88,9 @@ on country
 for each row
 execute function country_search_text_trigger();
 
-create index concurrently idx_country_search
+create index idx_country_search
 on country
 using gin (_country gin_trgm_ops);
+
+commit;
 -- ----------------------------------------------------------------------------
