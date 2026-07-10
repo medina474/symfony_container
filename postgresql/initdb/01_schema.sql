@@ -94,3 +94,6 @@ using gin (_country gin_trgm_ops);
 
 commit;
 -- ----------------------------------------------------------------------------
+
+drop database if exists cocagne_test with (force);
+create database app_test template app;

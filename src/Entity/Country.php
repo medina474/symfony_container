@@ -7,14 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
-#[ORM\Table(
-    indexes: [
-        new ORM\Index(
-            name: 'idx_country_country_code',
-            columns: ['country','code']
-        )
-    ]
-)]
+#[ORM\Index(name: 'idx_country_country_code', columns: ['country', 'code'])]
+#[ORM\Index(name: 'idx_country_search', columns: ['_country'])]
 class Country
 {
     #[ORM\Id]
