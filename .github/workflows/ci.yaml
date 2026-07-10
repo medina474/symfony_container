@@ -81,7 +81,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.5.7' 
+          php-version: '8.4.22' 
           extensions: sodium, xml, redis, session
           coverage: none
 
