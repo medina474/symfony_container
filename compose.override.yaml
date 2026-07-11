@@ -38,8 +38,6 @@ services:
     restart: no
     ports:
       - "5432:5432"
-    volumes:
-      - ./postgresql/initdb:/docker-entrypoint-initdb.d
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###

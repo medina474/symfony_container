@@ -64,6 +64,8 @@ services:
       start_period: 60s
     volumes:
       - /var/lib/postgresql
+      - ./postgresql/initdb:/docker-entrypoint-initdb.d
+      - ./postgresql/data:/data/app
 ###< doctrine/doctrine-bundle ###
 
 secrets:
