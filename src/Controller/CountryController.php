@@ -91,7 +91,7 @@ final class CountryController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}', name: 'app_country_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_country_show', methods: ['GET'])]
     public function show(Country $country): Response
     {
         return $this->render('country/show.html.twig', [
@@ -99,7 +99,7 @@ final class CountryController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/edit', name: 'app_country_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_country_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Country $country, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CountryType::class, $country);
@@ -117,7 +117,7 @@ final class CountryController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}', name: 'app_country_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_country_delete', methods: ['POST'])]
     public function delete(Request $request, Country $country, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$country->getCode(), $request->getPayload()->getString('_token'))) {

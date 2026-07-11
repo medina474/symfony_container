@@ -31,8 +31,8 @@
                 <td>{{ country.phoneCode }}</td>
                 <td>{{ country.country }}</td>
                 <td>
-                    <a href="{{ path('app_country_show', {'code': country.code}) }}">show</a>
-                    <a href="{{ path('app_country_edit', {'code': country.code}) }}">edit</a>
+                    <a href="{{ path('app_country_show', {'id': country.code}) }}">show</a>
+                    <a href="{{ path('app_country_edit', {'id': country.code}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
