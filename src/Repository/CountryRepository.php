@@ -16,6 +16,49 @@ class CountryRepository extends ServiceEntityRepository
         parent::__construct($registry, Country::class);
     }
 
+    public function findPaginatedBySearch(
+        int $maxResult,
+        ?string $search,
+        ?array $cursor
+    ): array
+    {
+        $query = $this->createQueryBuilder('c');
+
+        if (!empty($search)) {
+            $query
+                ->addSelect('similarity(c._country, norm(:search)) AS HIDDEN score')
+                ->andWhere('
+                    c._country like norm(:like)
+                    or similarity(c._country, norm(:search)) > 0.1
+                ')
+                ->setParameter('search', $search)
+                ->setParameter('like', '%' . $search . '%')
+                ->orderBy('score', 'DESC');
+        }
+
+        $query
+            ->orderBy('c.country', 'ASC')
+            ->addOrderBy('c.code', 'ASC')
+            ->setMaxResults($maxResult);
+
+        if ($cursor !== null) {
+            $query
+                ->andWhere(
+                    $query->expr()->orX(
+                        'c.country > :country',
+                        $query->expr()->andX(
+                            'c.country = :country',
+                            'c.code > :code'
+                        )
+                    )
+                )
+                ->setParameter('country', $cursor['country'])
+                ->setParameter('code', $cursor['code']);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+    
     //    /**
     //     * @return Country[] Returns an array of Country objects
     //     */
