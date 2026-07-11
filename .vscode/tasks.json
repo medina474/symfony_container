@@ -15,6 +15,21 @@
             "label": "PHPUnit",
             "type": "shell",
             "command": "bin/phpunit"
+        },
+        {
+            "label": "Tailwind build",
+            "type": "shell",
+            "command": "bin/console tailwind:build"
+        },
+        {
+            "label": "Debug router",
+            "type": "shell",
+            "command": "bin/console debug:router"
+        },
+        {
+            "label": "Cache clear",
+            "type": "shell",
+            "command": "bin/console cache:clear"
         }
     ]
 }
