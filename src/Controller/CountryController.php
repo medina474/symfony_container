@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Country;
 use App\Form\CountryType;
-use App\Pagination\CursorEncoder;
+use App\Utility\CursorEncoder;
 use App\Repository\CountryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
