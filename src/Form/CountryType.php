@@ -21,7 +21,6 @@ class CountryType extends AbstractType
             ->add('sepa')
             ->add('intracommunity')
             ->add('phone_code')
-            ->add('_country')
             ->add('tncc', EntityType::class, [
                 'class' => Tncc::class,
                 'choice_label' => 'id',

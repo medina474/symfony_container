@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create test database",
+            "type": "shell",
+            "command": "bin/console -e test doctrine:database:create"
+        },
+        {
+            "label": "Run migrations",
+            "type": "shell",
+            "command": "bin/console -e test doctrine:migrations:migrate --no-interaction"
+        },
+        {
+            "label": "PHPUnit",
+            "type": "shell",
+            "command": "bin/phpunit"
+        }
+    ]
+}

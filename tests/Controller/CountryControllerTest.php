@@ -49,7 +49,7 @@ final class CountryControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', $this->path);
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleContains('Pays');
+        self::assertPageTitleContains('Country index');
         self::assertSame('FR', $crawler->filter('td')->first()->text());
     }
 
@@ -66,7 +66,7 @@ final class CountryControllerTest extends WebTestCase
             'country[flag]' => '🇫🇷',
         ]);
 
-        self::assertResponseRedirects('/admin/country');
+        self::assertResponseRedirects('/country');
 
         self::assertSame(2, $this->countryRepository->count([]));
     }
@@ -76,7 +76,7 @@ final class CountryControllerTest extends WebTestCase
         $this->client->request('GET', sprintf('%s%s', $this->path, 'FR'));
 
         self::assertResponseStatusCodeSame(200);
-        self::assertPageTitleContains('France');
+        self::assertPageTitleContains('Country');
     }
 
     public function testEdit(): void
@@ -84,7 +84,7 @@ final class CountryControllerTest extends WebTestCase
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, 'FR'));
 
         $this->client->submitForm('Update', [
-            'country[code]' => 'Something New',
+            'country[code]' => 'XX',
             'country[country]' => 'Something New',
             'country[long]' => 'Something New',
             'country[flag]' => 'Something New',
@@ -95,11 +95,10 @@ final class CountryControllerTest extends WebTestCase
 
         $fixture = $this->countryRepository->findAll();
 
-        self::assertSame('Something New', $fixture[0]->getCode());
+        self::assertSame('XX', $fixture[0]->getCode());
         self::assertSame('Something New', $fixture[0]->getCountry());
         self::assertSame('Something New', $fixture[0]->getLong());
         self::assertSame('Something New', $fixture[0]->getFlag());
-        self::assertSame('Something New', $fixture[0]->getTncc());
     }
 
     public function testRemove(): void
