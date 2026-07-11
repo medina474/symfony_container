@@ -10,20 +10,20 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version00000000000001 extends SqlMigration
+final class Version00000000000002 extends SqlMigration
 {
     public function getDescription(): string
     {
-        return 'Géo';
+        return 'Job';
     }
 
     public function up(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/Version00000000000001.sql');
+        $this->executeSqlFile(__DIR__ . '/sql/job.sql');
     }
 
     public function down(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/Version00000000000001.down.sql');
+        $this->executeSqlFile(__DIR__ . '/sql/job.down.sql');
     }
 }

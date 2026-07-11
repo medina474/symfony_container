@@ -22,10 +22,8 @@ class AppFixtures extends Fixture
         $country->setCountry('France');
         $country->setLong('République française');
         $country->setFlag('🇫🇷');
-        //$country->setTncc($tncc);
+        $country->setTncc($tncc);
         $manager->persist($country);
-
-        $manager->flush();
 
         $manager->flush();
     }
