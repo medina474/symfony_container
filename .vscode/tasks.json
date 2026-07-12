@@ -4,37 +4,52 @@
         {
             "label": "Create test database",
             "type": "shell",
-            "command": "bin/console -e test doctrine:database:create"
+            "command": "bin/console -e test doctrine:database:create",
+            "problemMatcher": []
         },
         {
             "label": "Run migrations",
             "type": "shell",
-            "command": "bin/console -e test doctrine:migrations:migrate --no-interaction"
+            "command": "bin/console -e test doctrine:migrations:migrate --no-interaction",
+            "problemMatcher": []
         },
         {
             "label": "PHPUnit",
             "type": "shell",
-            "command": "bin/phpunit"
+            "command": "bin/phpunit",
+            "problemMatcher": []
+        },
+        {
+            "label": "PHPStan",
+            "type": "shell",
+            "command": "vendor/bin/phpstan --memory-limit=256M",
+            "problemMatcher": [
+                "$php"
+            ]
         },
         {
             "label": "Tailwind build",
             "type": "shell",
-            "command": "bin/console tailwind:build"
+            "command": "bin/console tailwind:build",
+            "problemMatcher": []
         },
         {
             "label": "Debug router",
             "type": "shell",
-            "command": "bin/console debug:router"
+            "command": "bin/console debug:router",
+            "problemMatcher": []
         },
         {
             "label": "Cache clear",
             "type": "shell",
-            "command": "bin/console cache:clear"
+            "command": "bin/console cache:clear",
+            "problemMatcher": []
         },
         {
             "label": "Messenger consume",
             "type": "shell",
             "command": "bin/console messenger:consume async -vv",
+            "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
