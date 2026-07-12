@@ -21,7 +21,7 @@ class JobMessageHandler
 
     public function __invoke(JobMessage $message): void
     {
-        $job = $this->repository->find(Uuid::fromString($message->getId()));
+        $job = $this->repository->find($message->getId());
         $job->markProcessing();
         $this->em->flush();
 
@@ -30,7 +30,7 @@ class JobMessageHandler
             $job->markDone($message->getPayload());
         } catch (\Throwable $e) {
             $job->markFailed($e->getMessage());
-            throw $e;
+            throw $e;  // rethrow pour le mécanisme de retry de Messenger
         } finally {
             $this->em->flush();
         }

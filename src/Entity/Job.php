@@ -43,10 +43,7 @@ class Job
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $handledAt = null;
 
-    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE,
-        insertable: false,
-        updatable: false,
-        nullable: true)]
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $completedAt = null;
 
     public function __construct(string $action)

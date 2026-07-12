@@ -9,12 +9,12 @@ use Symfony\Component\Uid\Uuid;
 class JobMessage
 {
     public function __construct(
-        private string $id,
+        private Uuid $id,
         private array $payload,
     ) {
     }
 
-    public function getId(): string
+    public function getId(): Uuid
     {
         return $this->id;
     }

@@ -25,7 +25,7 @@ final readonly class JobManager
         $this->entityManager->flush();
 
         $this->messageBus->dispatch(
-            new JobMessage($job->getId()->toString(), $payload)
+            new JobMessage($job->getId(), $payload)
         );
     
         return $job;
