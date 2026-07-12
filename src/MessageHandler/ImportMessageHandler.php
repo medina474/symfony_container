@@ -2,7 +2,7 @@
 
 namespace App\MessageHandler;
 
-use App\Csv\CsvImporter;
+use App\Utility\CsvImporter;
 use App\Message\ImportMessage;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

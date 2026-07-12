@@ -30,6 +30,11 @@
             "label": "Cache clear",
             "type": "shell",
             "command": "bin/console cache:clear"
+        },
+        {
+            "label": "Messenger consume",
+            "type": "shell",
+            "command": "bin/console messenger:consume async -vv"
         }
     ]
 }

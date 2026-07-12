@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Csv;
+namespace App\Utility;
 
 use App\Entity\FirstNameStat;
 use Doctrine\ORM\EntityManagerInterface;
