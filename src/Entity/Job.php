@@ -37,6 +37,9 @@ class Job
         options: ['default' => 'current_timestamp'])]
     private \DateTimeImmutable $createdAt;
 
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $handledAt = null;
+
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE,
         insertable: false,
         updatable: false,
@@ -55,14 +58,16 @@ class Job
     public function getResult(): ?array  { return $this->result; }
     public function getErrorMessage(): ?string { return $this->errorMessage; }
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
+    public function getHandledAt(): ?\DateTimeImmutable { return $this->handledAt; }
     public function getCompletedAt(): ?\DateTimeImmutable { return $this->completedAt; }
-
+    
     // Setters
     public function setPayload(array $payload): static  { $this->payload = $payload; return $this; }
 
     public function markProcessing(): static
     {
         $this->status = self::STATUS_PROCESSING;
+        $this->handledAt = new \DateTimeImmutable();
         return $this;
     }
 
