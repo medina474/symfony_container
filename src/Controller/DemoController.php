@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Serializer\SerializerInterface;
+use App\Job\JobManager;
+use App\Job\JobLogger;
+use App\Dto\JobView;
 use App\Message\DemoMessage;
 use App\Message\ImportMessage;
 use Psr\Log\LoggerInterface;
@@ -9,7 +13,6 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -18,6 +21,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use App\Repository\JobRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Uid\Uuid;
 
 final class DemoController extends AbstractController
 {
@@ -157,6 +163,21 @@ final class DemoController extends AbstractController
     public function form(): Response
     {
         return $this->render('demo/form.html.twig');
+    }
+
+    #[Route('/demo/test', name: 'demo_test')]
+    public function test(
+        Request $request,
+        JobManager $jobManager,
+        SerializerInterface $serializer,
+    ): Response
+    {
+        $job = $jobManager->dispatch(new JobLogger(),  ["message" => "Vas y !"]); 
+
+        return $this->json($serializer->serialize(
+            JobView::fromEntity($job),
+            'json'
+        ));
     }
 
     #[Route('/demo/async', name: 'demo_async')]

@@ -10,7 +10,7 @@ class JobMessage
 {
     public function __construct(
         private string $id,
-        private string $payload,
+        private array $payload,
     ) {
     }
 
@@ -19,7 +19,7 @@ class JobMessage
         return $this->id;
     }
 
-    public function getPayload(): string
+    public function getPayload(): array
     {
         return $this->payload;
     }

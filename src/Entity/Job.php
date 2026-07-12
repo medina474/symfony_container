@@ -16,7 +16,7 @@ class Job
     const STATUS_FAILED     = 'failed';
 
     #[ORM\Id]
-    #[ORM\Column(type: Types::GUID, unique: true)]
+    #[ORM\Column(type: 'uuid', unique: true)]
     private Uuid $id;
 
     #[ORM\Column(type: Types::TEXT)]
