@@ -17,7 +17,7 @@ class Job
 
     #[ORM\Id]
     #[ORM\Column(type: Types::GUID, unique: true)]
-    private string $id;
+    private Uuid $id;
 
     #[ORM\Column(type: Types::TEXT)]
     private string $status = self::STATUS_PENDING;
@@ -48,11 +48,11 @@ class Job
 
     public function __construct()
     {
-        $this->id = Uuid::v4();
+        $this->id = Uuid::v7();
     }
 
     // Getters
-    public function getId(): string { return $this->id; }
+    public function getId(): Uuid { return $this->id; }
     public function getStatus(): string { return $this->status; }
     public function getPayload(): ?array  { return $this->payload; }
     public function getResult(): ?array  { return $this->result; }
