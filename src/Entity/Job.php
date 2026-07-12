@@ -20,6 +20,9 @@ class Job
     private Uuid $id;
 
     #[ORM\Column(type: Types::TEXT)]
+    private string $action;
+
+    #[ORM\Column(type: Types::TEXT)]
     private string $status = self::STATUS_PENDING;
 
     #[ORM\Column(type: 'jsonb')]
@@ -46,13 +49,15 @@ class Job
         nullable: true)]
     private ?\DateTimeImmutable $completedAt = null;
 
-    public function __construct()
+    public function __construct(string $action)
     {
         $this->id = Uuid::v7();
+        $this->action = $action;
     }
 
     // Getters
     public function getId(): Uuid { return $this->id; }
+    public function getAction(): string { return $this->action; }
     public function getStatus(): string { return $this->status; }
     public function getPayload(): ?array  { return $this->payload; }
     public function getResult(): ?array  { return $this->result; }
@@ -62,6 +67,7 @@ class Job
     public function getCompletedAt(): ?\DateTimeImmutable { return $this->completedAt; }
     
     // Setters
+    public function setAction(string $action): static { $this->action = $action; return $this; }
     public function setPayload(array $payload): static  { $this->payload = $payload; return $this; }
 
     public function markProcessing(): static
