@@ -28,6 +28,7 @@ composer require \
 
 composer require \
 	symfony/redis-messenger \
+	symfony/doctrine-messenger \
 	symfony/mercure-bundle \
 	symfony/notifier \
 	symfony/mailer
