@@ -34,7 +34,11 @@
         {
             "label": "Messenger consume",
             "type": "shell",
-            "command": "bin/console messenger:consume async -vv"
+            "command": "bin/console messenger:consume async -vv",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
         }
     ]
 }
