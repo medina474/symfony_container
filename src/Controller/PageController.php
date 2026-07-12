@@ -14,7 +14,7 @@ final class PageController extends AbstractController
         name: 'page', 
         requirements: ['path' => '.+'],
     )]
-    public function index(string $path, Environment $twig): Response
+    public function __invoke(string $path, Environment $twig): Response
     {
         if (str_contains($path, '..')) {
             throw $this->createNotFoundException();
