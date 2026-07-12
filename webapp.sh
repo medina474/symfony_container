@@ -37,7 +37,8 @@ composer require \
 	symfony/security-bundle
 
 composer require \
-	symfony/uid
+	symfony/uid \
+	symfony/serializer-pack
 
 composer require --dev \
 	orm-fixtures \
