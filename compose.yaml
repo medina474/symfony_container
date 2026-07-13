@@ -49,7 +49,6 @@ services:
     image: ${IMAGES_PREFIX:-}app-postgresql
     build:
       context: postgresql
-    restart: no
     secrets:
       - database_password
     environment:

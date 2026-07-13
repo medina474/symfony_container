@@ -30,6 +30,7 @@ services:
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
   redis:
+    restart: no
     ports:
       - "6379:6379"
 
