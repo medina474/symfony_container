@@ -11,6 +11,8 @@ services:
       SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
       DEFAULT_URI: https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}
       DATABASE_PASSWORD_FILE: /run/secrets/database_password
+      CADDY_SERVER_LOG_OPTIONS: |
+        output stdout
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
