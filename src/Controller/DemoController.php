@@ -22,6 +22,9 @@ use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\Recipient\Recipient;
+use Symfony\Component\Notifier\NotifierInterface;
 
 final class DemoController extends AbstractController
 {
@@ -189,6 +192,20 @@ final class DemoController extends AbstractController
             JobView::fromEntity($job),
             'json'
         ));
+    }
+
+    #[Route('/demo/notifier', name: 'demo_notifier')]
+    public function notifier(
+        NotifierInterface $notifier
+    ):Response {
+        $notification = (new Notification(
+            sprintf('Test de notification')
+        ))
+            ->content("Contenu")
+            ->importance(Notification::IMPORTANCE_URGENT);
+
+        $notifier->send($notification, new Recipient("admin@toto.fr", "00"));
+        return $this->redirectToRoute('demo_mailer_success');
     }
 
     #[Route('/demo/async', name: 'demo_async')]
