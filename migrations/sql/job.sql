@@ -11,6 +11,7 @@ create table job (
     completed_at timestamp(0) with time zone default null::timestamp(0) with time zone
 );
 
+-- migration:statement
 create view reporting.job as
 select
     id,

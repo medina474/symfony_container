@@ -15,18 +15,7 @@ class JobMessage
     ) {
     }
 
-    public function getId(): Uuid
-    {
-        return $this->id;
-    }
-
-    public function getPayload(): array
-    {
-        return $this->payload;
-    }
-
-    public function getData(): ?string
-    {
-        return $this->data;
-    }
+    public function getId(): Uuid { return $this->id; }
+    public function getPayload(): array { return $this->payload; }
+    public function getData(): ?string { return $this->data; }
 }
