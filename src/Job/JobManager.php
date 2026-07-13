@@ -15,10 +15,21 @@ final readonly class JobManager
     ) {
     }
 
-    public function dispatch(JobProcessorInterface $request, array $payload): Job
+    /**
+     * @param class-string<JobProcessorInterface> $processorClass
+     */
+    public function dispatch(string $processorClass, array $payload): Job
     {
+        if (!is_a($processorClass, JobProcessorInterface::class, true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'La classe "%s" doit implémenter %s.',
+                $processorClass,
+                JobProcessorInterface::class,
+            ));
+        }
+
         $job = new Job(
-            action: $request::class,
+            action: $processorClass,
         );
 
         $this->entityManager->persist($job);

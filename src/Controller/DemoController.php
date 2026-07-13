@@ -172,7 +172,7 @@ final class DemoController extends AbstractController
         SerializerInterface $serializer,
     ): Response
     {
-        $job = $jobManager->dispatch(new JobLogger(),  ["message" => "Vas y !"]); 
+        $job = $jobManager->dispatch(JobLogger::class,  ["message" => "Vas y !"]); 
 
         return $this->json($serializer->serialize(
             JobView::fromEntity($job),
