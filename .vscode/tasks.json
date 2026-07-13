@@ -54,6 +54,15 @@
                 "reveal": "always",
                 "panel": "new"
             }
+        },
+        {
+            "label": "Create database password",
+            "type": "shell",
+            "command": "openssl rand -base64 32 > secrets/database_password",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never"
+            }
         }
     ]
 }

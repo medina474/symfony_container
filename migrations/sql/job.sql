@@ -10,3 +10,17 @@ create table job (
     handled_at timestamp(0) with time zone default null::timestamp(0) with time zone,
     completed_at timestamp(0) with time zone default null::timestamp(0) with time zone
 );
+
+create view reporting.job as
+select
+    id,
+    action,
+    status,
+    payload,
+    result,
+    error_message,
+    retry_count,
+    created_at,
+    handled_at,
+    completed_at
+from public.job;
