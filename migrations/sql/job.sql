@@ -5,6 +5,7 @@ create table job (
     payload jsonb not null,
     result jsonb null,
     error_message text null,
+    retry_count smallint not null default 0,
     created_at timestamp(0) with time zone default current_timestamp not null,
     handled_at timestamp(0) with time zone default null::timestamp(0) with time zone,
     completed_at timestamp(0) with time zone default null::timestamp(0) with time zone

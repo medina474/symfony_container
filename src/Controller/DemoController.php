@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Dto\JobView;
+use App\Job\JobFake;
 use App\Job\JobLogger;
 use App\Job\JobManager;
 use App\Message\DemoMessage;
@@ -162,13 +163,27 @@ final class DemoController extends AbstractController
         return $this->render('demo/form.html.twig');
     }
 
-    #[Route('/demo/test', name: 'demo_test')]
-    public function test(
+    #[Route('/demo/job/logger', name: 'demo_job_logger')]
+    public function job_logger(
         JobManager $jobManager,
         SerializerInterface $serializer,
     ): Response
     {
         $job = $jobManager->dispatch(JobLogger::class,  ["auteur" => "Otto West"], "C'était un test !"); 
+
+        return $this->json($serializer->serialize(
+            JobView::fromEntity($job),
+            'json'
+        ));
+    }
+
+    #[Route('/demo/job/fake', name: 'demo_job_fake')]
+    public function job_fake(
+        JobManager $jobManager,
+        SerializerInterface $serializer,
+    ): Response
+    {
+        $job = $jobManager->dispatch(JobFake::class,  ["behavior" => "fail"]); 
 
         return $this->json($serializer->serialize(
             JobView::fromEntity($job),

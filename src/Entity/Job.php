@@ -34,6 +34,9 @@ class Job
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $errorMessage = null;
 
+    #[ORM\Column(type: Types::SMALLINT, options: ['default' => 0])]
+    private int $retryCount = 0;
+
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE,
         insertable: false,
         updatable: false,
@@ -60,11 +63,13 @@ class Job
     public function getPayload(): ?array  { return $this->payload; }
     public function getResult(): ?array  { return $this->result; }
     public function getErrorMessage(): ?string { return $this->errorMessage; }
+    public function getRetryCount(): int { return $this->retryCount; }
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getHandledAt(): ?\DateTimeImmutable { return $this->handledAt; }
     public function getCompletedAt(): ?\DateTimeImmutable { return $this->completedAt; }
     
     // Setters
+    public function setRetryCount(int $retryCount): static { $this->retryCount = $retryCount; return $this; }
 
     // Mark
     public function markProcessing(): static
@@ -87,6 +92,7 @@ class Job
         $this->status       = self::STATUS_FAILED;
         $this->errorMessage = $error;
         $this->completedAt  = new \DateTimeImmutable();
+        //$this->retryCount++;
         return $this;
     }
 }

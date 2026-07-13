@@ -2,7 +2,6 @@
 
 namespace App\MessageHandler;
 
-use App\Job\JobExecutorRegistry;
 use App\Message\JobMessage;
 use App\Repository\JobRepository;
 use Doctrine\ORM\EntityManagerInterface;
