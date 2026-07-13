@@ -10,20 +10,20 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20260702033312 extends SqlMigration
+final class Version20260701130458 extends SqlMigration
 {
     public function getDescription(): string
     {
-        return 'Géo';
+        return 'Chronologie';
     }
 
     public function up(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/geo.sql');
+        $this->executeSqlFile(__DIR__ . '/sql/chronologie.sql');
     }
 
     public function down(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/geo.down.sql');
+        $this->executeSqlFile(__DIR__ . '/sql/chronologie.down.sql');
     }
 }
