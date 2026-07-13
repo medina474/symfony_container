@@ -29,7 +29,7 @@ create table chronologie as
 comment on column chronologie.jj is 'Jour julien';
 
 -- migration:statement
-create view chronologie.job as
+create view reporting.chronologie as
 select
     jj,
     jour,

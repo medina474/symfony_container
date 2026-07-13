@@ -42,7 +42,7 @@ services:
     ulimits:
       memlock: -1
     volumes:
-      - /data
+      - redis_data:/data
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -63,10 +63,18 @@ services:
       retries: 5
       start_period: 60s
     volumes:
-      - /var/lib/postgresql
+      - database_data:/var/lib/postgresql:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql:rw
       - ./postgresql/initdb:/docker-entrypoint-initdb.d
       - ./postgresql/data:/data/app
 ###< doctrine/doctrine-bundle ###
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###
+  redis_data:
 
 secrets:
   database_password:

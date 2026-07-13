@@ -14,6 +14,4 @@ grant usage on schema reporting to grafana;
 
 -- migration:statement
 alter default privileges in schema reporting
-
--- migration:statement
-grant select on tables to grafana;
+    grant select on tables to grafana;
