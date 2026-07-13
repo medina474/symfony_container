@@ -24,6 +24,6 @@ final class Version20260701130458 extends SqlMigration
 
     public function down(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/chronologie.down.sql');
+        $this->addSql('drop table chronologie');
     }
 }

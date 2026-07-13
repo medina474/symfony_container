@@ -7,24 +7,20 @@ namespace DoctrineMigrations;
 use App\Utility\SqlMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
-final class Version20260702033312 extends SqlMigration
+final class Version20260713221546 extends SqlMigration
 {
     public function getDescription(): string
     {
-        return 'Géo';
+        return '';
     }
 
     public function up(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/geo.sql');
+        $this->executeSqlFile(__DIR__ . '/sql/user.sql');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('drop table country');
-        $this->addSql('drop table tncc');
+        $this->addSql('drop table "user"');
     }
 }

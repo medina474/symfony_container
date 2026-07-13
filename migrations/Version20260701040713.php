@@ -24,6 +24,7 @@ final class Version20260701040713 extends SqlMigration
 
     public function down(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/reporting.down.sql');
+        $this->addSql('drop schema reporting cascade;');
+        $this->addSql('drop role grafana;');
     }
 }

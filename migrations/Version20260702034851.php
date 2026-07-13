@@ -24,6 +24,7 @@ final class Version20260702034851 extends SqlMigration
 
     public function down(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/job.down.sql');
+        $this->addSql('drop view reporting.job');
+        $this->addSql('drop table job');
     }
 }
