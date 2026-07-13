@@ -30,8 +30,15 @@ composer require \
 	symfony/redis-messenger \
 	symfony/doctrine-messenger \
 	symfony/mercure-bundle \
-	symfony/notifier \
 	symfony/mailer
+
+# You cannot use "Symfony\Bridge\Twig\Mime\NotificationEmail" if the "CSS Inliner" and "Inky" Twig extensions are not available. 
+# Try running "composer require twig/cssinliner-extra twig/inky-extra".
+
+composer require \
+	symfony/notifier \
+	twig/cssinliner-extra \
+	twig/inky-extra
 
 composer require \
 	symfony/security-bundle
