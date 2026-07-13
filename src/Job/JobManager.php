@@ -18,7 +18,11 @@ final readonly class JobManager
     /**
      * @param class-string<JobProcessorInterface> $processorClass
      */
-    public function dispatch(string $processorClass, array $payload): Job
+    public function dispatch(
+        string $processorClass, 
+        array $payload = [], 
+        ?string $data = null
+    ): Job
     {
         if (!is_a($processorClass, JobProcessorInterface::class, true)) {
             throw new \InvalidArgumentException(sprintf(
@@ -30,13 +34,14 @@ final readonly class JobManager
 
         $job = new Job(
             action: $processorClass,
+            payload: $payload
         );
 
         $this->entityManager->persist($job);
         $this->entityManager->flush();
 
         $this->messageBus->dispatch(
-            new JobMessage($job->getId(), $payload)
+            new JobMessage($job->getId(), $payload, $data)
         );
     
         return $job;

@@ -4,8 +4,8 @@ namespace App\Job;
 
 use App\Entity\Job;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('app.job_processor')]
 #[AsTaggedItem(index: self::class)]
@@ -16,8 +16,8 @@ final class JobLogger implements JobProcessorInterface
     ) {
     }
 
-    public function __invoke(Job $job): void
+    public function __invoke(Job $job, string $data): void
     {
-       $this->logger->error("test", $job->getPayload());
+        $this->logger->error($data, $job->getPayload()["auteur"]);
     }
 }

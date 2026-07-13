@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Serializer\SerializerInterface;
-use App\Job\JobManager;
-use App\Job\JobLogger;
 use App\Dto\JobView;
+use App\Job\JobLogger;
+use App\Job\JobManager;
 use App\Message\DemoMessage;
 use App\Message\ImportMessage;
 use Psr\Log\LoggerInterface;
@@ -19,11 +18,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
-use App\Repository\JobRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Uid\Uuid;
 
 final class DemoController extends AbstractController
 {
@@ -167,12 +164,11 @@ final class DemoController extends AbstractController
 
     #[Route('/demo/test', name: 'demo_test')]
     public function test(
-        Request $request,
         JobManager $jobManager,
         SerializerInterface $serializer,
     ): Response
     {
-        $job = $jobManager->dispatch(JobLogger::class,  ["message" => "Vas y !"]); 
+        $job = $jobManager->dispatch(JobLogger::class,  ["auteur" => "Otto West"], "C'était un test !"); 
 
         return $this->json($serializer->serialize(
             JobView::fromEntity($job),

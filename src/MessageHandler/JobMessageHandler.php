@@ -42,8 +42,8 @@ class JobMessageHandler
         try {
             /** @var JobProcessorInterface $processor */
             $processor = $this->processors->get($job->getAction());
-            $processor($job);
-            $job->markDone($message->getPayload());
+            $result = $processor($job, $message->getData());
+            $job->markDone($result);
         } catch (\Throwable $e) {
             $job->markFailed($e->getMessage());
             throw $e;  // rethrow pour le mécanisme de retry de Messenger

@@ -46,10 +46,11 @@ class Job
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $completedAt = null;
 
-    public function __construct(string $action)
+    public function __construct(string $action, array $payload = [])
     {
         $this->id = Uuid::v7();
         $this->action = $action;
+        $this->payload = $payload;
     }
 
     // Getters
@@ -64,9 +65,8 @@ class Job
     public function getCompletedAt(): ?\DateTimeImmutable { return $this->completedAt; }
     
     // Setters
-    public function setAction(string $action): static { $this->action = $action; return $this; }
-    public function setPayload(array $payload): static  { $this->payload = $payload; return $this; }
 
+    // Mark
     public function markProcessing(): static
     {
         $this->status = self::STATUS_PROCESSING;

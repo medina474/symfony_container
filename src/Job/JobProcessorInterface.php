@@ -6,5 +6,5 @@ use App\Entity\Job;
 
 interface JobProcessorInterface
 {
-    public function __invoke(Job $job): void;
+    public function __invoke(Job $job, string $data): void;
 }

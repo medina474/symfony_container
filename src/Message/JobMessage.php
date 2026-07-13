@@ -10,7 +10,8 @@ class JobMessage
 {
     public function __construct(
         private Uuid $id,
-        private array $payload,
+        private array $payload = [],
+        private ?string $data = null,
     ) {
     }
 
@@ -22,5 +23,10 @@ class JobMessage
     public function getPayload(): array
     {
         return $this->payload;
+    }
+
+    public function getData(): ?string
+    {
+        return $this->data;
     }
 }
