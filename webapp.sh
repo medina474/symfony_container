@@ -24,7 +24,8 @@ composer require \
 composer require \
 	symfony/orm-pack \
 	symfony/form \
-	symfony/validator
+	symfony/validator \
+	martin-georgiev/postgresql-for-doctrine
 
 composer require \
 	symfony/redis-messenger \
@@ -50,4 +51,3 @@ composer require \
 composer require --dev \
 	orm-fixtures \
 	phpstan/phpstan-doctrine
-
