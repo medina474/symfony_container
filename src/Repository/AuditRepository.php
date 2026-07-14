@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Toolbox\Audit\Repository;
+namespace App\Repository;
 
-use Toolbox\Audit\Entity\Audit;
+use App\Entity\Audit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

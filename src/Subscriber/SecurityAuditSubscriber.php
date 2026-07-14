@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Toolbox\Audit\Subscriber;
+namespace App\Subscriber;
 
-use Toolbox\Audit\Service\AuditLogger;
-use Toolbox\Audit\Enum\AuditAction;
+use App\Service\AuditLogger;
+use App\Enum\AuditAction;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 use Symfony\Component\Security\Http\Event\LoginFailureEvent;

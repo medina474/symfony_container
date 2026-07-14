@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Toolbox\Audit\Service;
+namespace App\Service;
 
-use Toolbox\Audit\Entity\Audit;
-use Toolbox\Audit\Enum\AuditAction;
+use App\Entity\Audit;
+use App\Enum\AuditAction;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
