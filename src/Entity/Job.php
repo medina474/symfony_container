@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -6,6 +6,7 @@ use App\Repository\JobRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Uid\Uuid;
+use Doctrine\DBAL\Schema\DefaultExpression\CurrentTimestamp;
 
 #[ORM\Entity(repositoryClass: JobRepository::class)]
 class Job
@@ -25,10 +26,10 @@ class Job
     #[ORM\Column(type: Types::TEXT)]
     private string $status = self::STATUS_PENDING;
 
-    #[ORM\Column(type: 'jsonb')]
+    #[ORM\Column(type: Types::JSONB)]
     private array $payload = [];
 
-    #[ORM\Column(type: 'jsonb', nullable: true)]
+    #[ORM\Column(type: Types::JSONB, nullable: true)]
     private array $result = [];
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -40,7 +41,7 @@ class Job
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE,
         insertable: false,
         updatable: false,
-        options: ['default' => 'current_timestamp'])]
+        options: ['default' => new CurrentTimestamp()])]
     private \DateTimeImmutable $createdAt;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
