@@ -14,11 +14,14 @@ final class JobFake implements JobProcessorInterface
     ) {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function __invoke(Job $job, ?string $data): array
     {
         $payload = $job->getPayload();
         
-        if ($payload['behavior'] ?? null === 'fail') {
+        if (($payload['behavior'] ?? null) === 'fail') {
             throw new \RuntimeException($payload['errorMessage'] ?? 'Échec simulé.');
         }
 

@@ -45,6 +45,9 @@ class Audit
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message = null;
 
+    /**
+     * @var array<string, mixed>
+     */
     #[ORM\Column(type: Types::JSONB, nullable: true)]
     private array $data = [];
 
@@ -70,13 +73,19 @@ class Audit
     ])]
     private ?string $span_id = null;
 
+    // Constructeur
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     // Getters
     public function getUser(): ?User { return $this->user; }
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getAction(): AuditAction { return $this->action; }
     public function getEntity(): ?string { return $this->entity; }
-    public function getTraceId(): ?int { return $this->trace_id; }
-    public function getSpanId(): ?int { return $this->span_id; }
+    public function getTraceId(): ?string { return $this->trace_id; }
+    public function getSpanId(): ?string { return $this->span_id; }
     public function getEntityId(): ?int { return $this->entityId; }
     public function getIpAddress(): ?string { return $this->ipAddress; }
     
@@ -132,24 +141,30 @@ class Audit
         return $this;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getData(): ?array
     {
         return $this->data;
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function setData(array $data): static
     {
         $this->data = $data;
         return $this;
     }
 
-    public function setSpanId(?int $span_id): static
+    public function setSpanId(?string $span_id): static
     {
         $this->span_id = $span_id;
         return $this;
     }
 
-    public function setTraceId(?int $trace_id): static
+    public function setTraceId(?string $trace_id): static
     {
         $this->trace_id = $trace_id;
         return $this;

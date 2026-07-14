@@ -14,10 +14,10 @@ class Tncc
     protected ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $article = null;
+    private string $article;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $charniere = null;
+    private string $charniere;
 
     public function getId(): ?int
     {

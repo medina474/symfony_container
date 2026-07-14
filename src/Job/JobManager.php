@@ -17,6 +17,7 @@ final readonly class JobManager
 
     /**
      * @param class-string<JobProcessorInterface> $processorClass
+     * @param array<string, mixed> $payload
      */
     public function dispatch(
         string $processorClass, 

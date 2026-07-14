@@ -17,6 +17,9 @@ final class AuditLogger
         private RequestStack $requestStack
     ) {}
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function log(
         AuditAction $type,
         string $message,

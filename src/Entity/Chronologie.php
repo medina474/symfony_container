@@ -58,7 +58,7 @@ class Chronologie
 
     public function getJj(): int { return $this->jj; }
     public function getEpoch(): int { return $this->epoch; }
-    public function getJour(): int { return $this->jour; }
+    public function getJour(): \DateTime { return $this->jour; }
     public function getAnnee(): int { return $this->annee; }
     public function getMois(): int { return $this->mois; }
     public function getJmois(): int { return $this->jmois; }

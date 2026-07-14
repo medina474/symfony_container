@@ -16,6 +16,9 @@ final class JobLogger implements JobProcessorInterface
     ) {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function __invoke(Job $job, ?string $data): array
     {
         $this->logger->error($data, $job->getPayload());
