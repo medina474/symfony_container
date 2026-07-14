@@ -7,11 +7,11 @@ namespace DoctrineMigrations;
 use App\Utility\SqlMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-final class Version20260713221546 extends SqlMigration
+final class Version20260713021546 extends SqlMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Users';
     }
 
     public function up(Schema $schema): void

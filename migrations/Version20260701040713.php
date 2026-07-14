@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use App\Utility\SqlMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
-final class Version20260701040713 extends SqlMigration
+final class Version20260701040713 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -19,12 +16,17 @@ final class Version20260701040713 extends SqlMigration
 
     public function up(Schema $schema): void
     {
-        $this->executeSqlFile(__DIR__ . '/sql/reporting.sql');
+        $dbName = $this->connection->getDatabase();
+
+        $this->addSql('create schema if not exists reporting;');
+        $this->addSql(sprintf('grant connect on database "%s" to grafana;', $dbName));
+        $this->addSql(sprintf('alter role grafana in database "%s" set search_path = reporting;', $dbName));
+        $this->addSql('grant usage on schema reporting to grafana;');
+        $this->addSql('alter default privileges in schema reporting grant select on tables to grafana;');
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql('drop schema reporting cascade;');
-        $this->addSql('drop role grafana;');
     }
 }
