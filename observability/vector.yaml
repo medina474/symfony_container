@@ -39,13 +39,14 @@ transforms:
           del(.resp_headers)
 
           # reclassification du niveau selon le code HTTP
+          .level_name = .level
           .level = to_int(.status) ?? 0
           if .level >= 500 {
             .level_name = "FATAL"
           } else if .level >= 400 {
             .level_name = "ERROR"
-          } 
-          # sinon on garde le .level d'origine renvoyé par Caddy (info)
+          }
+          # sinon on garde le .level d'origine renvoyé par Caddy (INFO)
           
           # message lisible pour _msg, plutôt que le JSON brut
           method_s = to_string(.http_method) ?? "?"
@@ -70,6 +71,8 @@ transforms:
           .service = "unknown"
         }
       }
+
+      del(.label."dev.frankenphp.base.fingerprint")
 
       del(.label."devcontainer.config_file")
       del(.label."devcontainer.local_folder")
