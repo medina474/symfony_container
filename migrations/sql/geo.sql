@@ -47,7 +47,7 @@ create table country (
     country text not null,
     tncc_id smallint references tncc not null,
     flag text,
-    "long" text, -- noqa: RF06
+    "long" text,
     intracommunity boolean not null default false,
     sepa boolean not null default false,
     phone_code smallint

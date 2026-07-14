@@ -1,6 +1,6 @@
 create table job (
     id uuid primary key,
-    "action" text not null, -- noqa: RF06
+    "action" text not null,
     status text not null,
     payload jsonb not null,
     result jsonb null,
