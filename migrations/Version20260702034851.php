@@ -7,9 +7,6 @@ namespace DoctrineMigrations;
 use App\Utility\SqlMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20260702034851 extends SqlMigration
 {
     public function getDescription(): string
