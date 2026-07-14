@@ -8,24 +8,108 @@ with recursive calendrier as (
 )
 
 select
-    (extract(epoch from jour) / 86400::int)::int as jj,
-    jour,
-    extract(year from jour)::int as annee,
+    (extract(epoch from jour) / 86400::int + 2440588)::int as jj,
+    extract(epoch from jour)::bigint as epoch,
+    jour::date,
+    extract(year from jour)::smallint as annee,
     extract(month from jour)::smallint as mois,
     extract(day from jour)::smallint as jmois,
     extract(week from jour)::smallint as semaine,
     extract(dow from jour)::smallint as jsemaine,
-    extract(doy from jour)::int as jannee,
+    extract(doy from jour)::smallint as jannee,
     (floor((extract(month from jour) - 1) / 6) + 1)::smallint as semestre,
     (floor((extract(month from jour) - 1) / 4) + 1)::smallint as quadrimestre,
     extract(quarter from jour)::smallint as trimestre,
     (floor((extract(month from jour) - 1) / 2) + 1)::smallint as bimestre,
-    (extract(day from jour) / extract(day from (date_trunc('month', '2025-03-16'::date) + interval '1 month' - interval '1 day')))::real as frac_mois,
-    (extract(doy from jour) / extract(doy from (extract(year from jour) || '-12-31')::date))::real as frac_annee
-  from calendrier;
+    (extract(day from jour) / extract(day from (date_trunc('month', '2025-03-16'::date) + interval '1 month' - interval '1 day')))::double precision as frac_mois,
+    (extract(doy from jour) / extract(doy from (extract(year from jour) || '-12-31')::date))::double precision as frac_annee
+from calendrier;
+
+-- migration:statement
+alter table chronologie add primary key (jj);
 
 -- migration:statement
 comment on column chronologie.jj is 'Jour julien';
+
+-- migration:statement
+alter table chronologie alter jj set default 2440588;
+-- migration:statement
+alter table chronologie alter jj set not null;
+
+-- migration:statement
+alter table chronologie alter epoch set default 0;
+-- migration:statement
+alter table chronologie alter epoch set not null;
+
+-- migration:statement
+alter table chronologie alter jour set default '1970-01-01';
+-- migration:statement
+alter table chronologie alter jour set not null;
+
+-- migration:statement
+alter table chronologie alter jmois set default 0;
+-- migration:statement
+alter table chronologie alter jmois set not null;
+
+-- migration:statement
+alter table chronologie alter annee set default 0;
+-- migration:statement
+alter table chronologie alter annee set not null;
+
+-- migration:statement
+alter table chronologie alter mois set default 0;
+-- migration:statement
+alter table chronologie alter mois set not null;
+
+-- migration:statement
+alter table chronologie alter semestre set default 0;
+-- migration:statement
+alter table chronologie alter semestre set not null;
+
+-- migration:statement
+alter table chronologie alter quadrimestre set default 0;
+-- migration:statement
+alter table chronologie alter quadrimestre set not null;
+
+-- migration:statement
+alter table chronologie alter trimestre set default 0;
+-- migration:statement
+alter table chronologie alter trimestre set not null;
+
+-- migration:statement
+alter table chronologie alter bimestre set default 0;
+-- migration:statement
+alter table chronologie alter bimestre set not null;
+
+-- migration:statement
+alter table chronologie alter semaine set default 0;
+-- migration:statement
+alter table chronologie alter semaine set not null;
+
+-- migration:statement
+alter table chronologie alter jsemaine set default 0;
+-- migration:statement
+alter table chronologie alter jsemaine set not null;
+
+-- migration:statement
+alter table chronologie alter jmois set default 0;
+-- migration:statement
+alter table chronologie alter jmois set not null;
+
+-- migration:statement
+alter table chronologie alter jannee set default 0;
+-- migration:statement
+alter table chronologie alter jannee set not null;
+
+-- migration:statement
+alter table chronologie alter frac_mois set default 0.0;
+-- migration:statement
+alter table chronologie alter frac_mois set not null;
+
+-- migration:statement
+alter table chronologie alter frac_annee set default 0.0;
+-- migration:statement
+alter table chronologie alter frac_annee set not null;
 
 -- migration:statement
 create view reporting.chronologie as
