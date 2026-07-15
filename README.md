@@ -243,3 +243,5 @@ docker compose build --pull --no-cache
 ```shell
 docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
 ```
+
+docker compose run --rm k6 -e K6_PROMETHEUS_RW_SERVER_URL=http://victoriametrics:8428/api/v1/write -o experimental-prometheus-rw run smoke.js

@@ -12,6 +12,16 @@ services:
       - "-retentionPeriod=60d"   # Keep logs for 60 days
       - "-defaultMsgValue=empty" # Fallback so logs aren't dropped
 
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:v1.147.0
+    restart: no
+    command:
+      - "-storageDataPath=/victoria-metrics-data"
+      - "-retentionPeriod=12"
+      - "-httpListenAddr=:8428"
+    volumes:
+      - victoriametrics:/victoria-metrics-data
+    
   vector:
     image: timberio/vector:0.57.0.custom.3d46266-distroless-libc
     restart: no
@@ -46,6 +56,7 @@ services:
 
 volumes:
   victorialogs:
+  victoriametrics:
   grafana:
 
 secrets:

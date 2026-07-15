@@ -70,6 +70,14 @@ services:
       - ./postgresql/initdb:/docker-entrypoint-initdb.d
       - ./postgresql/data:/data/app
 ###< doctrine/doctrine-bundle ###
+    
+  k6:
+    image: grafana/k6:latest
+    profiles:
+      - bench
+    volumes:
+      - ./performance/k6:/scripts:ro
+    working_dir: /scripts
 
 volumes:
   caddy_data:
