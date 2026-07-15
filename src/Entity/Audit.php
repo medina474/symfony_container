@@ -89,7 +89,7 @@ class Audit
     public function getEntityId(): ?int { return $this->entityId; }
     public function getIpAddress(): ?string { return $this->ipAddress; }
     
-    public function setUser(User $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
         return $this;

@@ -26,9 +26,15 @@ class Job
     #[ORM\Column(type: Types::TEXT)]
     private string $status = self::STATUS_PENDING;
 
+    /**
+     * @var array<string, mixed>
+     */
     #[ORM\Column(type: Types::JSONB)]
     private array $payload = [];
 
+    /**
+     * @var array<string, mixed>
+     */
     #[ORM\Column(type: Types::JSONB, nullable: true)]
     private array $result = [];
 
@@ -50,18 +56,28 @@ class Job
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $completedAt = null;
 
+    /**
+     * @param array<string, mixed> $payload
+     */
     public function __construct(string $action, array $payload = [])
     {
         $this->id = Uuid::v7();
         $this->action = $action;
         $this->payload = $payload;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     // Getters
     public function getId(): Uuid { return $this->id; }
     public function getAction(): string { return $this->action; }
     public function getStatus(): string { return $this->status; }
+    /**
+     * @return array<string, mixed>
+     */
     public function getPayload(): ?array  { return $this->payload; }
+    /**
+     * @return array<string, mixed>
+     */
     public function getResult(): ?array  { return $this->result; }
     public function getErrorMessage(): ?string { return $this->errorMessage; }
     public function getRetryCount(): int { return $this->retryCount; }
@@ -80,6 +96,9 @@ class Job
         return $this;
     }
 
+    /**
+     * @param ?array<string, mixed> $result
+     */
     public function markDone(?array $result): static
     {
         $this->status      = self::STATUS_DONE;

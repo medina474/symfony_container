@@ -13,10 +13,10 @@ class Country
 {
     #[ORM\Id]
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $code = null;
+    private string $code;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $country = null;
+    private string $country;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $long = null;
@@ -35,15 +35,15 @@ class Country
 
     #[ORM\ManyToOne()]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Tncc $tncc = null;
+    private Tncc $tncc;
 
     #[ORM\Column(type: Types::TEXT,
         insertable: false,
         updatable: false,
         generated: 'ALWAYS')]
-    private ?string $_country = null;
+    private string $_country;
 
-    public function getCode(): ?string
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -54,7 +54,7 @@ class Country
         return $this;
     }
 
-    public function getCountry(): ?string
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -87,10 +87,7 @@ class Country
         return $this;
     }
 
-    public function isSepa(): bool
-    {
-        return $this->sepa;
-    }
+    public function isSepa(): bool { return $this->sepa; }
 
     public function setSepa(bool $sepa): static
     {
@@ -98,10 +95,7 @@ class Country
         return $this;
     }
 
-    public function isIntracommunity(): bool
-    {
-        return $this->intracommunity;
-    }
+    public function isIntracommunity(): bool { return $this->intracommunity; }
 
     public function setIntracommunity(bool $intracommunity): static
     {
@@ -120,7 +114,7 @@ class Country
         return $this;
     }
 
-    public function getTncc(): ?Tncc
+    public function getTncc(): Tncc
     {
         return $this->tncc;
     }

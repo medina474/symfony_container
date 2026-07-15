@@ -11,7 +11,7 @@ class Tncc
 {
     #[ORM\Id]
     #[ORM\Column(type: Types::SMALLINT)]
-    protected ?int $id = null;
+    protected int $id;
 
     #[ORM\Column(type: Types::TEXT)]
     private string $article;
@@ -19,7 +19,7 @@ class Tncc
     #[ORM\Column(type: Types::TEXT)]
     private string $charniere;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ChronologieRepository;
-use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ChronologieRepository::class)]
+#[ORM\Cache(usage: 'READ_ONLY')]
 class Chronologie
 {    
     #[ORM\Id]
@@ -18,7 +18,7 @@ class Chronologie
     private int $epoch = 0;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, options: ['default' => '1970-01-01'])]
-    private \DateTime $jour;
+    private \DateTimeImmutable $jour;
 
     #[ORM\Column(type: Types::SMALLINT, options: ['default' => 0])]
     private int $annee = 0;
@@ -58,7 +58,7 @@ class Chronologie
 
     public function getJj(): int { return $this->jj; }
     public function getEpoch(): int { return $this->epoch; }
-    public function getJour(): \DateTime { return $this->jour; }
+    public function getJour(): \DateTimeImmutable { return $this->jour; }
     public function getAnnee(): int { return $this->annee; }
     public function getMois(): int { return $this->mois; }
     public function getJmois(): int { return $this->jmois; }
@@ -71,4 +71,8 @@ class Chronologie
     public function getJannee(): int { return $this->jannee; }
     public function getFracMois(): float { return $this->frac_mois; }
     public function getFracAnnee(): float { return $this->frac_annee; }
+
+    public function __construct() {
+        $this->jour = new \DateTimeImmutable('1970-01-01');
+    }
 }

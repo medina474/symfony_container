@@ -32,7 +32,9 @@ final class AuditLogger
         $audit->setMessage($message);
         $audit->setData($data);
 
-        $audit->setUser($user ?? $this->security->getUser());
+        /** @var ?User $currentUser */
+        $currentUser = $user ?? $this->security->getUser();
+        $audit->setUser($currentUser);
 
         $request = $this->requestStack->getCurrentRequest();
         if ($request) {

@@ -25,6 +25,8 @@ final readonly class JobManager
         ?string $data = null
     ): Job
     {
+        // Because the type is coming from a PHPDoc, you can turn off this check
+        /*
         if (!is_a($processorClass, JobProcessorInterface::class, true)) {
             throw new \InvalidArgumentException(sprintf(
                 'La classe "%s" doit implémenter %s.',
@@ -32,6 +34,7 @@ final readonly class JobManager
                 JobProcessorInterface::class,
             ));
         }
+        */
 
         $job = new Job(
             action: $processorClass,

@@ -2,6 +2,7 @@
 
 namespace App\Subscriber;
 
+use App\Entity\User;
 use App\Service\AuditLogger;
 use App\Enum\AuditAction;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,6 +29,10 @@ final class SecurityAuditSubscriber implements EventSubscriberInterface
     {
         $user = $event->getUser();
 
+        if (!$user instanceof User) {
+            throw new \LogicException('Authenticated user must be an App\Entity\User.');
+        }
+
         $this->auditLogger->log(
             AuditAction::LOGIN_SUCCESS,
             'User logged in successfully',
@@ -53,12 +58,16 @@ final class SecurityAuditSubscriber implements EventSubscriberInterface
 
     public function onLogout(LogoutEvent $event): void
     {
-        $token = $event->getToken();
+        $user = $event->getToken()?->getUser();
 
+        if (!$user instanceof User) {
+            throw new \LogicException('Authenticated user must be an App\Entity\User.');
+        }
+        
         $this->auditLogger->log(
             AuditAction::LOGOUT,
             'User logged out',
-            user: $token?->getUser()
+            user: $user
         );
     }
 }
