@@ -8,6 +8,10 @@ parameters:
         - tests/
     doctrine:
         objectManagerLoader: tests/object-manager.php
+    ignoreErrors:
+        -
+            identifier: method.unused
+            path: src/Kernel.php
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-doctrine/rules.neon

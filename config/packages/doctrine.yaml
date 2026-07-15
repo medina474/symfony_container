@@ -26,6 +26,10 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            string_functions:
+                similarity: App\Doctrine\DQL\Similarity
+                norm: App\Doctrine\DQL\Norm
 
 when@test:
     doctrine:

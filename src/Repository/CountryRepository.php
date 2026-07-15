@@ -16,6 +16,10 @@ class CountryRepository extends ServiceEntityRepository
         parent::__construct($registry, Country::class);
     }
 
+    /**
+     * @param array{country: string, code: string}|null $cursor
+     * @return list<Country>
+     */
     public function findPaginatedBySearch(
         int $maxResult,
         ?string $search,

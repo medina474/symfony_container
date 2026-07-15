@@ -9,6 +9,9 @@ final class CursorEncoder
     ) {
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function encode(?array $data): ?string
     {
         if ($data === null) {
@@ -39,6 +42,9 @@ final class CursorEncoder
         return $encodedPayload . '.' . $encodedSignature;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function decode(?string $cursor): ?array
     {
         if ($cursor === null || $cursor === '') {
