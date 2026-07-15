@@ -64,3 +64,5 @@ jobs:
       # Uncomment if Doctrine ORM is installed
       - name: Doctrine Schema Validator
         run: docker compose exec -T php bin/console -e test doctrine:schema:validate
+      - name: PhpStan
+        run: docker compose exec -T php vendor/bin/phpstan --memory-limit=256M
