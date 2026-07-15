@@ -6,10 +6,11 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
+use Doctrine\ORM\Query\AST\Node;
 
 final class Norm extends FunctionNode
 {
-    private mixed $firstExpression;
+    private Node $firstExpression;
 
     public function parse(Parser $parser): void
     {
