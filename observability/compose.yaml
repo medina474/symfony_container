@@ -3,8 +3,6 @@ services:
   victorialogs:
     image: victoriametrics/victoria-logs:v1.51.0
     restart: no
-    ports:
-      - "9428:9428"
     volumes:
       - victorialogs:/victoria-logs-data
     command:
@@ -38,8 +36,6 @@ services:
     depends_on:
       - victorialogs
     restart: no
-    ports:
-      - "3000:3000"
     secrets:
       - grafana_password
     environment:

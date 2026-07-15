@@ -48,7 +48,6 @@ services:
     restart: no
     ports:
       - "1025"
-      - "8025:8025"
     environment:
       TZ: Europe/Paris
       # Accept any SMTP username and password, including none. Use this to basically allow anything.
