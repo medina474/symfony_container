@@ -16,6 +16,7 @@ services:
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       - app_vendor:/app/vendor
+      - ./frankenphp/dev:/etc/frankenphp/conf.d
     environment:
       FRANKENPHP_WORKER_CONFIG: watch
       FRANKENPHP_SITE_CONFIG: hot_reload

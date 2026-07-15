@@ -1,0 +1,4 @@
+mail.localhost {
+	tls internal
+	reverse_proxy mailpit:8025
+}

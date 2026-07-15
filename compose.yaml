@@ -13,6 +13,8 @@ services:
       DATABASE_PASSWORD_FILE: /run/secrets/database_password
       CADDY_SERVER_LOG_OPTIONS: |
         output stdout
+      CADDY_EXTRA_CONFIG: |
+        import /etc/frankenphp/conf.d/*.caddy
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
