@@ -56,6 +56,7 @@ services:
     secrets:
       - database_password
       - backup_password
+      - grafana_password
     environment:
       POSTGRES_INITDB_ARGS: --locale-provider=icu --icu-locale=fr-FR
       POSTGRES_DB: ${DATABASE_DB:-app}
@@ -95,3 +96,5 @@ secrets:
     file: ./secrets/database_password
   backup_password:
     file: ./secrets/backup_password
+  grafana_password:
+    file: ./secrets/grafana_password

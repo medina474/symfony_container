@@ -74,7 +74,5 @@ volumes:
   ntfy:
 
 secrets:
-  grafana_password:
-    file: ./secrets/grafana_password
   admin_password:
     file: ./secrets/admin_password
