@@ -1,6 +1,7 @@
 framework:
     notifier:
         chatter_transports:
+            ntfy: '%env(NTFY_DSN)%'
         texter_transports:
             freemobile: '%env(FREE_MOBILE_DSN)%'
         channel_policy:

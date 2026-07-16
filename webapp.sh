@@ -39,7 +39,9 @@ composer require \
 composer require \
 	symfony/notifier \
 	twig/cssinliner-extra \
-	twig/inky-extra
+	twig/inky-extra \
+	symfony/ntfy-notifier \
+	symfony/free-mobile-notifier
 
 composer require \
 	symfony/security-bundle
