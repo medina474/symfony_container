@@ -38,7 +38,7 @@ services:
     restart: no
     secrets:
       - admin_password
-      - grafana_password
+      - role_grafana_password
     environment:
       GF_SECURITY_ADMIN_EMAIL: ${ADMIN_EMAIL}
       GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/admin_password

@@ -34,12 +34,12 @@ services:
         database:
           condition: service_healthy
     secrets:
-      - backup_password
+      - role_backup_password
     environment:
         - POSTGRES_HOST=database
         - POSTGRES_DB=app
         - POSTGRES_USER=backup
-        - POSTGRES_PASSWORD_FILE=/run/secrets/backup_password
+        - POSTGRES_PASSWORD_FILE=/run/secrets/role_backup_password
         - POSTGRES_EXTRA_OPTS=-Z1 --schema=public --blobs
         - SCHEDULE=@daily
         - BACKUP_ON_START=TRUE
@@ -59,7 +59,3 @@ services:
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
-
-secrets:
-  backup_password:
-    file: ./secrets/backup_password

@@ -55,8 +55,8 @@ services:
       context: postgresql
     secrets:
       - database_password
-      - backup_password
-      - grafana_password
+      - role_backup_password
+      - role_grafana_password
     environment:
       POSTGRES_INITDB_ARGS: --locale-provider=icu --icu-locale=fr-FR
       POSTGRES_DB: ${DATABASE_DB:-app}
@@ -94,7 +94,7 @@ volumes:
 secrets:
   database_password:
     file: ./secrets/database_password
-  backup_password:
-    file: ./secrets/backup_password
-  grafana_password:
-    file: ./secrets/grafana_password
+  role_backup_password:
+    file: ./secrets/role_backup_password
+  role_grafana_password:
+    file: ./secrets/role_grafana_password
