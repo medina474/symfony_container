@@ -37,10 +37,11 @@ services:
       - victorialogs
     restart: no
     secrets:
+      - admin_password
       - grafana_password
     environment:
       GF_SECURITY_ADMIN_EMAIL: ${ADMIN_EMAIL}
-      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana_password
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/admin_password
       GF_USERS_DEFAULT_THEME: system
       GF_USERS_ALLOW_SIGN_UP: false
       GF_ANALYTICS_REPORTING_ENABLED: false
@@ -75,3 +76,5 @@ volumes:
 secrets:
   grafana_password:
     file: ./secrets/grafana_password
+  admin_password:
+    file: ./secrets/admin_password
