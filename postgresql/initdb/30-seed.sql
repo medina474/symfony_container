@@ -1,0 +1,3 @@
+-- Placez à cet endroit les requêtes qui doivent ajouter des données initiales
+-- à la base de données
+-- ----------------------------------------------------------------------------

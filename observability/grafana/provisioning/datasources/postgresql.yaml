@@ -10,7 +10,7 @@ datasources:
     user: grafana
 
     secureJsonData:
-      password: 9410
+      password: $__file{/run/secrets/grafana_password}
 
     jsonData:
       database: app

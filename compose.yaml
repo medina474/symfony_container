@@ -55,6 +55,7 @@ services:
       context: postgresql
     secrets:
       - database_password
+      - backup_password
     environment:
       POSTGRES_INITDB_ARGS: --locale-provider=icu --icu-locale=fr-FR
       POSTGRES_DB: ${DATABASE_DB:-app}
@@ -92,3 +93,5 @@ volumes:
 secrets:
   database_password:
     file: ./secrets/database_password
+  backup_password:
+    file: ./secrets/backup_password
