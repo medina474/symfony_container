@@ -1,14 +1,14 @@
 framework:
     notifier:
-        chatter_transports:
-            ntfy: '%env(NTFY_DSN)%'
         texter_transports:
+            ntfy: '%env(NTFY_DSN)%'
             freemobile: '%env(FREE_MOBILE_DSN)%'
         channel_policy:
             # use chat/slack, chat/telegram, sms/twilio or sms/nexmo
-            urgent: ['email']
+            urgent: ['sms/ntfy']
             high: ['email']
             medium: ['email']
             low: ['email']
         admin_recipients:
-            - { email: admin@example.com }
+            - { email: admin@app.fr }
+        notification_on_failed_messages: true

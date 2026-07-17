@@ -24,7 +24,11 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Notifier\Recipient\Recipient;
+use Symfony\Component\Notifier\Message\PushMessage;
+use Symfony\Component\Notifier\TexterInterface;
 use Symfony\Component\Notifier\NotifierInterface;
+use Symfony\Component\Notifier\Symfony\Component\Notifier\Bridge\Ntfy\NtfyOptions;
+use Symfony\Component\Uid\Uuid;
 
 final class DemoController extends AbstractController
 {
@@ -131,7 +135,7 @@ final class DemoController extends AbstractController
         MailerInterface $mailer,
     ): Response
     {
-         $email = new TemplatedEmail()
+         $email = (new TemplatedEmail())
             ->from('hello@example.com')
             ->to('you@example.com')
             //->cc('cc@example.com')
@@ -194,18 +198,25 @@ final class DemoController extends AbstractController
         ));
     }
 
-    #[Route('/demo/notifier', name: 'demo_notifier')]
+    #[Route('/demo/notifier', name: 'demo_notifier', methods: ['POST'])]
     public function notifier(
-        NotifierInterface $notifier
+        TexterInterface $texter
     ):Response {
-        $notification = (new Notification(
-            sprintf('Test de notification')
-        ))
-            ->content("Contenu")
-            ->importance(Notification::IMPORTANCE_URGENT);
 
-        $notifier->send($notification, new Recipient("admin@toto.fr", "00"));
-        return $this->redirectToRoute('demo_mailer_success');
+        $message = new PushMessage(
+            '3e test',
+            'Contenu'
+        );
+
+        $texter->send($message);
+
+        return $this->redirectToRoute('demo_notifier_success');
+    }
+
+    #[Route('/demo/notifier/success', name: 'demo_notifier_success')]
+    public function notifier_success(): Response
+    {
+        return $this->render('demo/notifier.html.twig');
     }
 
     #[Route('/demo/async', name: 'demo_async')]
