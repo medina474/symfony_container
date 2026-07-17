@@ -83,6 +83,9 @@ services:
       - ./performance/k6:/scripts:ro
     working_dir: /scripts
 
+  gotenberg:
+    image: gotenberg/gotenberg:8
+
 volumes:
   caddy_data:
   caddy_config:
