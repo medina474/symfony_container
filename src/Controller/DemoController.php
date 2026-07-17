@@ -22,6 +22,7 @@ use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Component\Notifier\Message\SmsMessage;
 use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Notifier\Recipient\Recipient;
 use Symfony\Component\Notifier\Message\PushMessage;
@@ -109,7 +110,7 @@ final class DemoController extends AbstractController
     /**
      * Symfony Messenger
      */
-    #[Route('/demo/messenger', name: 'demo_messenger', methods:['POST'])]
+    #[Route('/demo/messenger', name: 'demo_messenger', methods: ['POST'])]
     public function messenger(
         MessageBusInterface $bus,
     ): Response
@@ -178,10 +179,14 @@ final class DemoController extends AbstractController
     {
         $job = $jobManager->dispatch(JobLogger::class,  ["auteur" => "Otto West"], "C'était un test !"); 
 
+        return $this->json(JobView::fromEntity($job));
+
+        /*
         return $this->json($serializer->serialize(
             JobView::fromEntity($job),
             'json'
         ));
+        */
     }
 
     #[Route('/demo/job/fake', name: 'demo_job_fake')]
@@ -231,7 +236,7 @@ final class DemoController extends AbstractController
             ->getForm();
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            $importId = uuid_create();
+            $importId = Uuid::v4();
             $content = (string) file_get_contents($form->get('csv')->getData()->getPathname());
 
             $bus->dispatch(new ImportMessage($importId, $content));

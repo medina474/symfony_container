@@ -46,7 +46,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Cache clear",
+            "label": "Clear cache",
             "type": "shell",
             "command": "bin/console cache:clear",
             "problemMatcher": []

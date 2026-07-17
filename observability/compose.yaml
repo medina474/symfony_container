@@ -55,14 +55,15 @@ services:
     image: binwiederhier/ntfy:v2.26
     restart: no
     environment:
-      NTFY_BASE_URL: http://ntfy.example.com
-      NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
+      NTFY_BASE_URL: https://ntfy.localhost
+      NTFY_BEHIND_PROXY: true
       NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
       NTFY_AUTH_DEFAULT_ACCESS: deny-all
-      NTFY_AUTH_USERS: 'phil:$$2a$$10$$YLiO8U21sX1uhZamTLJXHuxgVC0Z/GKISibrKCLohPgtG7yIxSk4C:admin' # Must escape '$' as '$$'
-      NTFY_BEHIND_PROXY: true
-      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+      NTFY_AUTH_USERS: 'admin:$$2b$$10$$RYMAbCBhpnIfdHpR301jJelfcmoJ3YLfap3ZzJ8JSFfYfACjOx/.2:admin' # Must escape '$' as '$$'
       NTFY_ENABLE_LOGIN: true
+      NTFY_REQUIRE_LOGIN: true
+      NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
     volumes:
       - ntfy:/var/lib/ntfy
     command: serve
