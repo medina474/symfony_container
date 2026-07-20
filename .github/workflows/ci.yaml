@@ -43,6 +43,9 @@ jobs:
         run: |
           mkdir -p secrets
           printf "%s" "${{ secrets.DATABASE_PASSWORD }}" > secrets/database_password
+          printf "%s" "${{ secrets.ROLE_BACKUP_PASSWORD }}" > secrets/role_backup_password
+          printf "%s" "${{ secrets.ROLE_GRAFANA_PASSWORD }}" > secrets/role_grafana_password
+          printf "%s" "${{ secrets.ADMIN_PASSWORD }}" > secrets/admin_password
       - name: Start services
         run: docker compose up --wait --no-build
       - name: Check HTTP reachability
